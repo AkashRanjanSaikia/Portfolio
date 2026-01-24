@@ -3,20 +3,22 @@ import { ArrowUpRight, Github } from "lucide-react";
 
 const projects = [
   {
+    title: "Cozy Stay",
+    description:
+      "A hotel booking platform with role-based access for admins and users.",
+    tags: ["Next.js", "Node.js", "MongoDB"],
+    image: "./image.png",
+    github: "https://github.com/AkashRanjanSaikia/CozyStay",
+    demo: "https://cozy-stay-pi.vercel.app/",
+  },
+  {
     title: "Video Meet",
     description:
       "A real-time video meeting web app with peer-to-peer calls and screen sharing.",
     tags: ["React", "WebRTC", "Socket.IO"],
     image: "./project_1.png",
-    link: "#",
-  },
-  {
-    title: "Cozy Stay",
-    description:
-      "A hotel booking platform with role-based access for admins and users.",
-    tags: ["Next.js", "Node.js", "MongoDB"],
-    image: "./project_2.png",
-    link: "#",
+    github: "https://github.com/AkashRanjanSaikia/video_Meet",
+    demo: "https://video-meet-sigma.vercel.app/",
   },
 
   {
@@ -30,7 +32,8 @@ const projects = [
     tags: ["TypeScript", "WebSocket", "Redis"],
     image:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
-    link: "#",
+    github: "#",
+    demo: "#",
   },
   {
     title: "Healthcare Portal",
@@ -43,7 +46,8 @@ const projects = [
     tags: ["React", "HIPAA", "AWS"],
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
-    link: "#",
+    github: "#",
+    demo: "#",
   },
 ];
 
@@ -126,7 +130,7 @@ const Projects = () => {
 
               {/* Overlay */}
               <div
-                className={`absolute inset-0 transition-all duration-700 ease-out ${
+                className={`absolute inset-0 transition-all duration-700 ease-out shadow-[inset_0_0_80px_rgba(0,0,0,0.5)] ${
                   activeIndex === index
                     ? "bg-gradient-to-t from-black/80 via-black/40 to-black/20"
                     : "bg-black/60"
@@ -138,7 +142,7 @@ const Projects = () => {
                 className={`absolute inset-0 p-8 flex flex-col justify-between text-white transition-all duration-500 ease-out ${
                   activeIndex === index
                     ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4"
+                    : "opacity-0 translate-y-4 pointer-events-none"
                 }`}
               >
                 {/* Tags */}
@@ -172,16 +176,20 @@ const Projects = () => {
                   }}
                 >
                   <a
-                    href={project.link}
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-foreground hover:scale-110 transition-all duration-500 ease-out shadow-lg dark:bg-zinc-900 dark:text-white"
-                    aria-label={`Visit ${project.title}`}
+                    aria-label={`View ${project.title} Source Code`}
                   >
                     <Github className="w-5 h-5" />
                   </a>
                   <a
-                    href={project.link}
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white text-foreground hover:scale-110 transition-all duration-500 ease-out shadow-lg dark:bg-zinc-900 dark:text-white"
-                    aria-label={`Visit ${project.title}`}
+                    aria-label={`Visit ${project.title} Live Demo`}
                   >
                     <ArrowUpRight className="w-5 h-5" />
                   </a>
@@ -225,7 +233,7 @@ const Projects = () => {
               <div
                 className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-out ${
                   activeIndex === index
-                    ? "opacity-0 scale-95"
+                    ? "opacity-0 scale-95 pointer-events-none"
                     : "opacity-100 scale-100"
                 }`}
               >
@@ -281,7 +289,13 @@ const Projects = () => {
         {/* Mobile Layout - Stacked Cards */}
         <div className="md:hidden space-y-6">
           {projects.map((project) => (
-            <a key={project.title} href={project.link} className="group block">
+            <a
+              key={project.title}
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
               <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
                 <img
                   src={project.image}

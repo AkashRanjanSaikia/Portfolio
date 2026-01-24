@@ -49,7 +49,7 @@ const Hero = () => {
               {/* Social Icons */}
               <div className="pl-2 flex items-center gap-4">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/akash-ranjan-saikia/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -60,7 +60,7 @@ const Hero = () => {
                   </span>
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/AkashRanjanSaikia"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub"

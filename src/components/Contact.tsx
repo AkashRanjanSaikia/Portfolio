@@ -2,10 +2,10 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import Twitter from "@/components/ui/twitter";
 
 const socials = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Mail, href: "mailto:hello@johndoe.dev", label: "Email" },
+  { icon: Github, href: "https://github.com/AkashRanjanSaikia", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/akash-ranjan-saikia/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://twitter.com/AkashRanjanSaikia", label: "Twitter" },
+  { icon: Mail, href: "mailto:arsaikia26@gmail.com", label: "Email" },
 ];
 
 const Contact = () => {
@@ -25,7 +25,7 @@ const Contact = () => {
           </p>
 
           <a
-            href="mailto:hello@johndoe.dev"
+            href="mailto:arsaikia26@gmail.com"
             className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full text-base font-medium hover:bg-primary/90 transition-colors mb-12"
           >
             <Mail className="w-5 h-5" />
