@@ -25,10 +25,6 @@ const projects = [
     title: "Task Management App",
     description:
       "Collaborative project management tool with real-time updates and intuitive drag-and-drop interface.",
-    quote:
-      "Our team productivity increased by 60% after implementing this solution across departments.",
-    author: "Emily Rodriguez",
-    role: "Project Manager",
     tags: ["TypeScript", "WebSocket", "Redis"],
     image:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
@@ -38,16 +34,12 @@ const projects = [
   {
     title: "Healthcare Portal",
     description:
-      "Secure patient management system with appointment scheduling and telemedicine integration.",
-    quote:
-      "Patient satisfaction scores improved dramatically with the new streamlined experience.",
-    author: "Dr. James Wilson",
-    role: "Medical Director",
-    tags: ["React", "HIPAA", "AWS"],
+      "A responsive portfolio website for MediCare Surgical, showcasing the company’s profile, services, and contact details.",
+    tags: ["React", "Framer Motion", "Tailwind CSS"],
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/AkashRanjanSaikia/MediCare-Surgical",
+    demo: "https://medi-care-surgical.vercel.app/",
   },
 ];
 
