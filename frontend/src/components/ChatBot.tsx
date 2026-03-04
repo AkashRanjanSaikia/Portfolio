@@ -76,7 +76,7 @@ const ChatBot: React.FC = () => {
     }));
 
     try {
-      const response = await fetch(`${process.env.Backend_URL}/api/chat`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
