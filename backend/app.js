@@ -21,7 +21,6 @@ const hourLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: 'Too many requests, please try again after an hour.' },
 });
-
 app.use(
   cors({
     origin: `${process.env.Frontend_URL}`
