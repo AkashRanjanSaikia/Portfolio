@@ -22,7 +22,11 @@ const hourLimiter = rateLimit({
   message: { error: 'Too many requests, please try again after an hour.' },
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: `${process.env.Frontend_URL}`
+  })
+);
 app.use(express.json());
 
 const predefinedAnswers = {
