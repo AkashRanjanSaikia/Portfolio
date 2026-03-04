@@ -57,6 +57,10 @@ app.post('/api/chat', hourLimiter , minitlimiter , async (req, res) => {
     }
 });
 
+app.get('/health', (req, res) => {
+    res.json({ message: 'Server is healthy' });
+});
+
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
