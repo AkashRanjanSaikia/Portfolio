@@ -61,11 +61,11 @@ const Skills = () => {
       gsap.from(headerRef.current, {
         scrollTrigger: {
           trigger: headerRef.current,
-          start: "top 85%",
+          start: "top 95%",
           once: true,
         },
         scale: 0.8,
-        y: 40,
+        y: 60,
         opacity: 0,
         duration: 1,
         ease: "back.out(1.7)",
@@ -77,17 +77,17 @@ const Skills = () => {
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
-            start: "top 90%", // Trigger slightly later for a "pop up" effect as it enters
+            start: "top 95%", // Trigger slightly later for a "pop up" effect as it enters
             once: true,
             // Add a slight stagger based on column position if needed, 
             // but individual triggers handle scroll timing naturally
           },
           scale: 0.7,
-          y: 60,
+          y: 100,
           opacity: 0,
-          duration: 0.8,
-          ease: "back.out(1.4)",
-          delay: (index % 3) * 0.1, // Slight horizontal stagger for cards in the same row
+          duration: 1,
+          ease: "power3.out",
+          delay: (index % 3) * 0.2, // Slight horizontal stagger for cards in the same row
           clearProps: "all",
         });
       });

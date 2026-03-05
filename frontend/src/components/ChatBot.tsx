@@ -126,7 +126,7 @@ const ChatBot: React.FC = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end animate-in fade-in zoom-in duration-700">
+    <div className="fixed bottom-4 right-2 md:bottom-6 md:right-6 z-50 flex flex-col items-end animate-in fade-in zoom-in duration-700">
       {isOpen && (
         <Card className="mb-4 w-[320px] sm:w-[380px] h-[500px] flex flex-col shadow-2xl border-primary/20 bg-slate-950 text-white animate-in fade-in slide-in-from-bottom-4 duration-300">
           <CardHeader className="p-4 bg-primary text-primary-foreground flex flex-row items-center justify-between rounded-t-lg border-b border-white/10">

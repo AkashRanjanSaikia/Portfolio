@@ -42,34 +42,34 @@ const Hero = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center relative"
       style={{ background: "var(--gradient-hero)" }}
     >
       {/* Subtle decorative elements */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent/30 rounded-full blur-2xl" />
 
-      <div className="container relative z-10 pt-24">
+      <div className="container relative z-10 pt-16 md:pt-24">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           {/* Left side - Text content */}
-          <div className="flex-[0.7]">
+          <div className="flex-[0.7] text-center md:text-left">
             <h2 
               ref={titleRef}
-              className="text-3xl md:text-4xl font-serif font-medium mb-2"
+              className="text-2xl md:text-4xl font-serif font-medium mb-2"
             >
               Hello, It's Me
             </h2>
 
             <h1 
               ref={nameRef}
-              className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold leading-[1.1] mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-sans font-bold leading-[1.1] mb-4"
             >
               Akash Ranjan Saikia
             </h1>
 
             <p 
               ref={descriptionRef}
-              className="text-sm md:text-base text-muted-foreground leading-relaxed mb-8"
+              className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6"
             >
               I'm a full-stack developer with hands-on experience in both frontend and backend. 
               I enjoy <br />
@@ -79,7 +79,7 @@ const Hero = () => {
 
             <div 
               ref={actionsRef}
-              className="flex flex-col gap-6"
+              className="flex flex-col items-center md:items-start gap-6"
             >
               <Button 
                 className="w-fit rounded-full px-6 gap-2"
@@ -138,7 +138,7 @@ const Hero = () => {
           {/* Right side - Image */}
           <div 
             ref={imageRef}
-            className="flex-[0.3] flex justify-center md:justify-end relative"
+            className="flex-[0.3] flex justify-center md:justify-end relative mb-10 md:mb-0"
           >
             {/* Decorative background blob */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-primary/10 rounded-full blur-3xl opacity-60" />
@@ -155,7 +155,7 @@ const Hero = () => {
                 <img 
                   src="/Img1.jpg" 
                   alt="Akash Ranjan Saikia" 
-                  className="w-56 h-80 md:w-80 md:h-[450px] object-cover"
+                  className="w-48 h-78 md:w-80 md:h-[450px] object-cover"
                 />
               </div>
               
@@ -169,7 +169,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-20">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer z-20 hidden md:block">
         <ArrowDown 
           className="w-6 h-6 text-muted-foreground"
           onClick={scrollToAbout}
