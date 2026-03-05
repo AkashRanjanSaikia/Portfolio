@@ -29,10 +29,10 @@ app.use(
 app.use(express.json());
 
 const predefinedAnswers = {
-    'q1': "Akash Ranjan Saikia is a passionate Full-stack Developer and AI enthusiast based in India. He loves building intelligent web applications and solving complex problems.",
-    'q2': "His core technical skills include React.js, Node.js, Express, MongoDB, Python, and working with LLMs like Gemini and Pinecone for RAG-based applications.",
-    'q3': "Akash has worked on several projects, including this portfolio website, a Real-time Chat App, and various AI-integrated tools. Check out the 'Projects' section for more details!",
-    'q4': "You can reach out to Akash via email at akashranjan.saikia@example.com or through his LinkedIn profile linked in the contact section."
+    'q1': "Akash Ranjan Saikia is a 3rd-year B.Tech Computer Science student and a Full-Stack Developer. He specializes in backend development and is passionate about building scalable web applications and exploring Generative AI.",
+    'q2': "His core technical skills include React.js, Node.js, Express, MongoDB, and Python. He also works with Large Language Models such as Gemini and tools like Pinecone to build RAG-based applications and AI agents.",
+    'q3': "Akash has worked on several projects, including VideoMeet, a real-time video meeting website; CozyStay, a hotel booking platform; and PDFChat, a RAG-based PDF question-answering system. You can explore more about these projects in the Projects section.",
+    'q4': "You can reach out to Akash via email at akashranjansaikia21@gmail.com or through his LinkedIn profile linked in the contact section."
 };
 
 
