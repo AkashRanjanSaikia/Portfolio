@@ -60,7 +60,7 @@ const skillCategories = [
     ],
   },
   {
-    title: "AI & Generative AI",
+    title: "Generative AI",
     icon: Brain,
     skills: [
       "RAG",
@@ -114,7 +114,7 @@ const Skills = () => {
           scrollTrigger: {
             trigger: card,
             start: "top 90%", // Trigger slightly later for a "pop up" effect as it enters
-            end: "top 70%",
+            end: "top 65%",
             scrub: 1,
           },
           scale: 0.7,

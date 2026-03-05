@@ -27,19 +27,19 @@ const About = () => {
           gsap.from(contentRef.current, {
             scrollTrigger: {
               trigger: contentRef.current,
-              start: "top 80%",
+              start: "top 95%",
               end: "top 20%",
               scrub: 1,
             },
-            x: 50,
+            scale: 0.8,
             opacity: 0,
-            ease: "power3.out",
+            ease: "power3.inOut",
           });
 
           gsap.from(imageRef.current, {
             scrollTrigger: {
               trigger: imageRef.current,
-              start: "top 90%",
+              start: "top 95%",
               end: "top 30%",
               scrub: 1,
             },
@@ -65,9 +65,9 @@ const About = () => {
           }).from(
             contentRef.current,
             {
-              x: 100,
+              scale: 0.8,
               opacity: 0,
-              ease: "power3.out",
+              ease: "power3.inOut",
             },
             "-=0.5",
           );

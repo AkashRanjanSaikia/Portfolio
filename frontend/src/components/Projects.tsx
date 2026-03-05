@@ -110,7 +110,7 @@ const Projects = () => {
               gsap.from(card, {
                 scrollTrigger: {
                   trigger: card,
-                  start: "top 80%",
+                  start: "top 60%",
                   toggleActions: "play none none none",
                 },
                 x: i % 2 === 0 ? -60 : 60,
