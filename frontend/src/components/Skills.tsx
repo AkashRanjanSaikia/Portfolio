@@ -19,32 +19,68 @@ const skillCategories = [
   {
     title: "Frontend Development",
     icon: Code2,
-    skills: ["React.js", "TypeScript", "Tailwind CSS", "Next.js"],
+    skills: [
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "HTML5",
+      "CSS3"
+    ],
   },
   {
     title: "Backend Development",
     icon: Server,
-    skills: ["Node.js", "Express.js", "REST APIs"],
+    skills: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "Authentication",
+      "WebSockets"
+    ],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: ["MongoDB", "PostgreSQL", "SQL"],
+    skills: [
+      "MongoDB",
+      "PostgreSQL",
+      "SQL"
+    ],
   },
   {
     title: "Programming Languages",
     icon: Terminal,
-    skills: ["Java", "C++", "Python", "JavaScript"],
+    skills: [
+      "Java",
+      "C++",
+      "Python",
+      "JavaScript"
+    ],
   },
   {
-    title: "Generative AI",
+    title: "AI & Generative AI",
     icon: Brain,
-    skills: [ "RAG", "LangChain", "LangGraph", "Vector DBs"],
+    skills: [
+      "RAG",
+      "LangChain",
+      "LangGraph",
+      "Vector Databases",
+      "Embeddings"
+    ],
   },
   {
     title: "Tools & Platforms",
     icon: Rocket,
-    skills: ["Git", "Docker", "CI/CD", "Socket.IO", "WebRTC"],
+    skills: [
+      "Git",
+      "GitHub",
+      "Docker",
+      "CI/CD",
+      "Socket.IO",
+      "WebRTC"
+    ],
   },
 ];
 

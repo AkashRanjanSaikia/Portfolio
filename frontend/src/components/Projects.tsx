@@ -1,4 +1,10 @@
-import { useState, useEffect, useCallback, useRef, useLayoutEffect } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import { ArrowUpRight, Github } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,22 +32,22 @@ const projects = [
   },
 
   {
-    title: "Task Management App",
+    title: "ChatPDF",
     description:
-      "Collaborative project management tool with real-time updates and intuitive drag-and-drop interface.",
-    tags: ["TypeScript", "WebSocket", "Redis"],
-    image: "/project_2.png",
-    github: "#",
+      "A RAG-based app that lets users upload PDFs and ask questions with context-aware answers.",
+    tags: ["RAG", "LangChain", "Pinecone","TypeScript"],
+    image: "/project_6.png",
+    github: "https://github.com/AkashRanjanSaikia/Chat_PDF",
     demo: "#",
   },
   {
-    title: "Healthcare Portal",
+    title: "Traffic Sign Detection",
     description:
-      "A responsive portfolio website for MediCare Surgical, showcasing the company’s profile, services, and contact details.",
-    tags: ["React", "Framer Motion", "Tailwind CSS"],
-    image: "/project_3.png",
-    github: "https://github.com/AkashRanjanSaikia/MediCare-Surgical",
-    demo: "https://medi-care-surgical.vercel.app/",
+      "A deep learning model for detecting and classifying traffic signs with real-time web-based inference.",
+    tags: ["Python", "PyTorch", "Computer Vision", "Deep Learning"],
+    image: "/project_7.png",
+    github: "https://github.com/AkashRanjanSaikia/traffic-sign-detection",
+    demo: "https://arsaikia26-traffic-sign-detection.hf.space/",
   },
 ];
 
@@ -59,65 +65,74 @@ const Projects = () => {
   useLayoutEffect(() => {
     let mm = gsap.matchMedia();
 
-    mm.add({
-      isDesktop: "(min-width: 1024px)",
-      isMobile: "(max-width: 1023px)"
-    }, (context) => {
-      const { isDesktop, isMobile } = context.conditions as any;
+    mm.add(
+      {
+        isDesktop: "(min-width: 1024px)",
+        isMobile: "(max-width: 1023px)",
+      },
+      (context) => {
+        const { isDesktop, isMobile } = context.conditions as any;
 
-      // Entrance Animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-          onEnter: () => setIsInView(true),
-        },
-      });
+        // Entrance Animation
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+            onEnter: () => setIsInView(true),
+          },
+        });
 
-      tl.from(headerRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      if (isDesktop) {
-        tl.from(contentRef.current, {
+        tl.from(headerRef.current, {
           y: 30,
           opacity: 0,
-          duration: 1.2,
+          duration: 1,
           ease: "power3.out",
-        }, "-=0.8");
-      }
-
-      if (isMobile) {
-        gsap.utils.toArray(".mobile-project-card").forEach((card: any, i: number) => {
-          gsap.from(card, {
-            scrollTrigger: {
-              trigger: card,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-            x: i % 2 === 0 ? -60 : 60,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power4.out",
-          });
         });
-      }
 
-      // Track visibility for animation cycling (runs on both)
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => setIsInView(true),
-        onLeave: () => setIsInView(false),
-        onEnterBack: () => setIsInView(true),
-        onLeaveBack: () => setIsInView(false),
-      });
-    });
+        if (isDesktop) {
+          tl.from(
+            contentRef.current,
+            {
+              y: 30,
+              opacity: 0,
+              duration: 1.2,
+              ease: "power3.out",
+            },
+            "-=0.8",
+          );
+        }
+
+        if (isMobile) {
+          gsap.utils
+            .toArray(".mobile-project-card")
+            .forEach((card: any, i: number) => {
+              gsap.from(card, {
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+                x: i % 2 === 0 ? -60 : 60,
+                opacity: 0,
+                duration: 1.5,
+                ease: "power4.out",
+              });
+            });
+        }
+
+        // Track visibility for animation cycling (runs on both)
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => setIsInView(true),
+          onLeave: () => setIsInView(false),
+          onEnterBack: () => setIsInView(true),
+          onLeaveBack: () => setIsInView(false),
+        });
+      },
+    );
 
     return () => mm.revert();
   }, []);
@@ -155,9 +170,16 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 md:pt-24 md:pb-40 bg-card/50 overflow-x-hidden">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="py-24 md:pt-24 md:pb-40 bg-card/50 overflow-x-hidden"
+    >
       <div className="container">
-        <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+        <div
+          ref={headerRef}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+        >
           <div>
             <p className="text-sm font-medium tracking-widest uppercase text-primary mb-4">
               Selected work
@@ -169,7 +191,10 @@ const Projects = () => {
         </div>
 
         {/* Desktop Layout */}
-        <div ref={contentRef} className="hidden lg:block relative min-h-[600px]">
+        <div
+          ref={contentRef}
+          className="hidden lg:block relative min-h-[600px]"
+        >
           {/* Project List */}
           <div className="max-w-md flex flex-col justify-center space-y-4">
             {projects.map((project, index) => (
@@ -196,31 +221,46 @@ const Projects = () => {
 
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex flex-col gap-1">
-                       <span className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-500 ${
-                         activeIndex === index ? "text-primary" : "text-muted-foreground/50"
-                       }`}>
-                         Project {String(index + 1).padStart(2, '0')}
-                       </span>
+                      <span
+                        className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-500 ${
+                          activeIndex === index
+                            ? "text-primary"
+                            : "text-muted-foreground/50"
+                        }`}
+                      >
+                        Project {String(index + 1).padStart(2, "0")}
+                      </span>
                       <h3 className="text-xl font-semibold tracking-tight">
                         {project.title}
                       </h3>
                     </div>
-                    <div className={`p-2 rounded-full transition-all duration-500 ${
-                      activeIndex === index ? "bg-primary text-primary-foreground rotate-0 shadow-md shadow-primary/20" : "bg-muted text-muted-foreground -rotate-45"
-                    }`}>
+                    <div
+                      className={`p-2 rounded-full transition-all duration-500 ${
+                        activeIndex === index
+                          ? "bg-primary text-primary-foreground rotate-0 shadow-md shadow-primary/20"
+                          : "bg-muted text-muted-foreground -rotate-45"
+                      }`}
+                    >
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
                     {project.description}
                   </p>
-                  
+
                   {/* Tags on active */}
-                  <div className={`flex flex-wrap gap-2 transition-all duration-500 ${
-                    activeIndex === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"
-                  }`}>
-                    {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 rounded-full text-[9px] font-bold bg-primary/10 text-primary border border-primary/20">
+                  <div
+                    className={`flex flex-wrap gap-2 transition-all duration-500 ${
+                      activeIndex === index
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-1 pointer-events-none"
+                    }`}
+                  >
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full text-[9px] font-bold bg-primary/10 text-primary border border-primary/20"
+                      >
                         {tag}
                       </span>
                     ))}
@@ -228,13 +268,16 @@ const Projects = () => {
                 </div>
 
                 {/* Overlapping Floating Preview (Sibling to trigger, so it won't activate on hover) */}
-                <div className={`absolute left-[calc(100%+3rem)] top-1/2 w-[650px] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-50 pointer-events-none ${
-                  activeIndex === index 
-                    ? "opacity-100 -translate-y-1/2 translate-x-0 scale-100" 
-                    : (index < activeIndex || (activeIndex === 0 && index === projects.length - 1))
-                      ? "opacity-0 -translate-y-[calc(50%+4rem)] translate-x-0 scale-95" 
-                      : "opacity-0 -translate-y-[calc(50%-4rem)] translate-x-0 scale-95"
-                }`}>
+                <div
+                  className={`absolute left-[calc(100%+3rem)] top-1/2 w-[650px] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] z-50 pointer-events-none ${
+                    activeIndex === index
+                      ? "opacity-100 -translate-y-1/2 translate-x-0 scale-100"
+                      : index < activeIndex ||
+                          (activeIndex === 0 && index === projects.length - 1)
+                        ? "opacity-0 -translate-y-[calc(50%+4rem)] translate-x-0 scale-95"
+                        : "opacity-0 -translate-y-[calc(50%-4rem)] translate-x-0 scale-95"
+                  }`}
+                >
                   <div className="relative aspect-video rounded-3xl overflow-hidden bg-muted border border-border shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] flex flex-col pointer-events-auto">
                     {/* Browser Header Mockup */}
                     <div className="h-10 bg-muted/90 border-b border-border flex items-center px-5 gap-2.5 shrink-0 z-20">
