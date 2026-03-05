@@ -57,7 +57,14 @@ const Projects = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    let mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)"
+    }, (context) => {
+      const { isDesktop, isMobile } = context.conditions as any;
+
       // Entrance Animation
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -73,30 +80,34 @@ const Projects = () => {
         opacity: 0,
         duration: 1,
         ease: "power3.out",
-      })
-      .from(
-        contentRef.current,
-        {
+      });
+
+      if (isDesktop) {
+        tl.from(contentRef.current, {
           y: 30,
           opacity: 0,
           duration: 1.2,
           ease: "power3.out",
-        },
-        "-=0.8",
-      )
-      .from(
-        ".mobile-project-card",
-        {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power3.out",
-        },
-        "-=1",
-      );
+        }, "-=0.8");
+      }
 
-      // Track visibility for animation cycling
+      if (isMobile) {
+        gsap.utils.toArray(".mobile-project-card").forEach((card: any, i: number) => {
+          gsap.from(card, {
+            scrollTrigger: {
+              trigger: card,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            x: i % 2 === 0 ? -60 : 60,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power4.out",
+          });
+        });
+      }
+
+      // Track visibility for animation cycling (runs on both)
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top center",
@@ -106,11 +117,9 @@ const Projects = () => {
         onEnterBack: () => setIsInView(true),
         onLeaveBack: () => setIsInView(false),
       });
+    });
 
-      ScrollTrigger.refresh();
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const goToNext = useCallback(() => {
@@ -146,7 +155,7 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" ref={sectionRef} className="py-24 md:pt-24 md:pb-40 bg-card/50">
+    <section id="projects" ref={sectionRef} className="py-24 md:pt-24 md:pb-40 bg-card/50 overflow-x-hidden">
       <div className="container">
         <div ref={headerRef} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
@@ -282,7 +291,7 @@ const Projects = () => {
           {projects.map((project) => (
             <div
               key={project.title}
-              className="group mobile-project-card bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-500"
+              className="group mobile-project-card bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow duration-500"
             >
               <div className="aspect-video overflow-hidden relative border-b border-border">
                 <img

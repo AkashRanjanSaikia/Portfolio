@@ -13,13 +13,13 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
+      const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
 
       tl.from(titleRef.current, { y: 50, opacity: 0, delay: 0.2 })
         .from(nameRef.current, { y: 50, opacity: 0 }, "-=0.8")
         .from(descriptionRef.current, { y: 50, opacity: 0 }, "-=0.8")
         .from(actionsRef.current, { y: 50, opacity: 0 }, "-=0.8")
-        .from(imageRef.current, { scale: 0.8, opacity: 0, duration: 1.2 }, "-=1");
+        .from(imageRef.current, { scale: 0.6, opacity: 0, duration: 1.2 }, "-=1");
 
       // Floating animation for the image
       gsap.to(imageRef.current, {

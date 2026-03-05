@@ -12,39 +12,77 @@ const About = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 45%",
-          once: true,
-        },
-      });
+    let mm = gsap.matchMedia();
 
-      tl.from(imageRef.current, {
-        x: -100,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out",
-      }).from(
-        contentRef.current,
-        {
-          x: 100,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
-        },
-        "-=0.8",
-      );
+    mm.add(
+      {
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)",
+      },
+      (context) => {
+        const { isMobile } = context.conditions as any;
 
-      ScrollTrigger.refresh();
-    }, sectionRef);
+        if (isMobile) {
+          // In mobile view, trigger content first, then image separately
+          gsap.from(contentRef.current, {
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: "top 80%",
+              end: "top 20%",
+              scrub: 1,
+            },
+            x: 50,
+            opacity: 0,
+            ease: "power3.out",
+          });
 
-    return () => ctx.revert();
+          gsap.from(imageRef.current, {
+            scrollTrigger: {
+              trigger: imageRef.current,
+              start: "top 90%",
+              end: "top 30%",
+              scrub: 1,
+            },
+            scale: 0.8,
+            opacity: 0,
+            ease: "power3.inOut",
+          });
+        } else {
+          // In desktop view, trigger both together as a timeline
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 55%",
+              end: "top 20%",
+              scrub: 1,
+            },
+          });
+
+          tl.from(imageRef.current, {
+            scale: 0.8,
+            opacity: 0,
+            ease: "power3.inOut",
+          }).from(
+            contentRef.current,
+            {
+              x: 100,
+              opacity: 0,
+              ease: "power3.out",
+            },
+            "-=0.5",
+          );
+        }
+
+        ScrollTrigger.refresh();
+      },
+      sectionRef,
+    );
+
+    return () => mm.revert();
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 md:py-32 overflow-hidden">
+    <section id="about" ref={sectionRef} className=" py-6 md:py-32 overflow-hidden">
       <div className="container mt-12">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Photo */}
