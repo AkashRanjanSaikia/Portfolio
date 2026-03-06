@@ -70,7 +70,7 @@ const ChatBot: React.FC = () => {
     setIsTyping(true);
 
     // Get last 4 messages for context (excluding the very first greeting if possible, or just last 4)
-    const history = updatedMessages.slice(-4).map(msg => ({
+    const history = updatedMessages.slice(-6).map(msg => ({
       sender: msg.sender,
       text: msg.text
     }));

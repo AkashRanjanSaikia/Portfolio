@@ -29,7 +29,7 @@ app.use(
 app.use(express.json());
 
 const predefinedAnswers = {
-    'q1': "Akash Ranjan Saikia is a 3rd-year B.Tech Computer Science student and a Full-Stack Developer. He specializes in backend development and is passionate about building scalable web applications and exploring Generative AI.",
+    'q1': "Akash Ranjan Saikia is a 3rd-year B.Tech Computer Science student and Full-Stack Developer focused on backend development, scalable web applications, and Generative AI.",
     'q2': "His core technical skills include React.js, Node.js, Express, MongoDB, and Python. He also works with Large Language Models such as Gemini and tools like Pinecone to build RAG-based applications and AI agents.",
     'q3': "Akash has worked on several projects, including VideoMeet, a real-time video meeting website; CozyStay, a hotel booking platform; and PDFChat, a RAG-based PDF question-answering system. You can explore more about these projects in the Projects section.",
     'q4': "You can reach out to Akash via email at akashranjansaikia21@gmail.com or through his LinkedIn profile linked in the contact section."

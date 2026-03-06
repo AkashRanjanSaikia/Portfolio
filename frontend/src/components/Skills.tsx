@@ -26,7 +26,7 @@ const skillCategories = [
       "JavaScript",
       "Tailwind CSS",
       "HTML5",
-      "CSS3"
+      "CSS3",
     ],
   },
   {
@@ -37,50 +37,28 @@ const skillCategories = [
       "Express.js",
       "REST APIs",
       "Authentication",
-      "WebSockets"
+      "WebSockets",
     ],
   },
   {
     title: "Databases",
     icon: Database,
-    skills: [
-      "MongoDB",
-      "PostgreSQL",
-      "SQL"
-    ],
+    skills: ["MongoDB", "PostgreSQL", "SQL"],
   },
   {
     title: "Programming Languages",
     icon: Terminal,
-    skills: [
-      "Java",
-      "C++",
-      "Python",
-      "JavaScript"
-    ],
+    skills: ["Java", "C++", "Python", "JavaScript"],
   },
   {
     title: "Generative AI",
     icon: Brain,
-    skills: [
-      "RAG",
-      "LangChain",
-      "LangGraph",
-      "Vector Databases",
-      "Embeddings"
-    ],
+    skills: ["RAG", "LangChain", "LangGraph", "Vector Databases", "Embeddings"],
   },
   {
     title: "Tools & Platforms",
     icon: Rocket,
-    skills: [
-      "Git",
-      "GitHub",
-      "Docker",
-      "CI/CD",
-      "Socket.IO",
-      "WebRTC"
-    ],
+    skills: ["Git", "GitHub", "Docker", "CI/CD", "Socket.IO", "WebRTC"],
   },
 ];
 
@@ -113,8 +91,8 @@ const Skills = () => {
         gsap.from(card, {
           scrollTrigger: {
             trigger: card,
-            start: "top 90%", // Trigger slightly later for a "pop up" effect as it enters
-            end: "top 65%",
+            start: "top 95%", // Trigger slightly later for a "pop up" effect as it enters
+            end: "top 75%",
             scrub: 1,
           },
           scale: 0.7,
@@ -148,22 +126,24 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" ref={sectionRef} className="py-24 md:py-20">
+    <section id="skills" ref={sectionRef} className="py-20 md:py-16">
       <div className="container">
         {/* Header */}
-        <div ref={headerRef} className="text-center mb-16">
+        <div ref={headerRef} className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-medium mb-4 ">
             Skills & Expertise
           </h2>
-          <div className="w-12 h-1 bg-primary mx-auto mb-6" />
+          <div className="w-24 h-1 bg-primary mx-auto mb-6" />
           <p className="text-muted-foreground max-w-xl mx-auto">
-            A comprehensive toolkit for building modern, scalable, and beautiful
-            web applications
+            A comprehensive toolkit for building modern, scalable, and beautiful web applications
           </p>
         </div>
 
         {/* Skills Grid */}
-        <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          ref={cardsRef}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             return (

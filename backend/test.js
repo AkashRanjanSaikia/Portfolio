@@ -5,33 +5,31 @@ dotenv.config();
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Pinecone } from "@pinecone-database/pinecone";
 
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const embeddingModel = genAI.getGenerativeModel({
+  model: "gemini-embedding-001",
+});
+// Pinecone query
+const pinecone = new Pinecone({
+  apiKey: process.env.PINECONE_API_KEY,
+});
+
+const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
+
 export async function getAns(message, history = [], currentSummary = "") {
-  console.log(message, history, currentSummary);
-
-  const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-
-  const embeddingModel = genAI.getGenerativeModel({
-    model: "gemini-embedding-001",
-  });
-
   // Embed user question
   const embeddingResponse = await embeddingModel.embedContent(message);
   const queryEmbedding = embeddingResponse.embedding.values;
 
-  // Pinecone query
-  const pinecone = new Pinecone({
-    apiKey: process.env.PINECONE_API_KEY,
-  });
-
-  const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
-
   const queryResponse = await index.query({
     vector: queryEmbedding,
-    topK: 5,
+    topK: 3,
     includeMetadata: true,
   });
 
   const matches = queryResponse.matches;
+
+  
 
   if (!matches || matches.length === 0) {
     return {
@@ -42,6 +40,8 @@ export async function getAns(message, history = [], currentSummary = "") {
 
   // Build context from retrieved chunks
   const context = matches.map((match) => match.metadata.text).join("\n\n");
+
+  console.log(context);
 
   // Generate final answer using Gemini
   const chatModel = genAI.getGenerativeModel({
@@ -56,33 +56,44 @@ export async function getAns(message, history = [], currentSummary = "") {
     )
     .join("\n");
 
-  const prompt = `
+const prompt = `
 You are the AI assistant for Akash Ranjan Saikia's portfolio website.
 
-Your job is to help visitors learn about Akash's background, skills, projects, education, and experience.
+Your role is to help visitors learn about Akash's background, skills, projects, education, and experience.
 
-Behavior Guidelines:
+Guidelines:
 - Be polite, friendly, and professional.
-- Keep responses SHORT, clear, and concise.
-- Avoid repeating the question in the answer.
+- Keep answers SHORT, clear, and factual.
+- Do not exaggerate or use promotional language.
+- Do not repeat the question.
 
 Conversation Handling:
-- If the user greets you (hi, hello, good morning, etc.), greet them politely and offer help.
+- If the user greets you, greet them politely and offer help.
 - If the user thanks you, respond politely.
 
 Information Rules:
-- Use the **retrieved context below as the primary source of information**.
-- You may also use the **conversation summary and recent conversation history** if they contain relevant information needed to answer the user's question.
-- Do NOT use outside knowledge or assumptions.
-- Do NOT fabricate or guess information.
-- If the answer is not present in the context, summary, or history, respond with:
-  "Sorry, I am not aware of the answer to that question."
+- Use ONLY the retrieved context below as the main source.
+- You may also use the conversation summary or recent history if relevant.
+- Do NOT invent or assume information.
 
-Conversation Summary so far:
-${currentSummary || "No summary yet."}
+Fallback:
+- If the question is unrelated to Akash or his portfolio, respond:
+"Sorry, I'm just a portfolio assistant and can't answer that. Please ask something related to Akash Ranjan Saikia's projects, skills, or experience."
+- If the question is about Akash but the information is not available in the provided context:
+"Sorry, I am not aware of the answer to that question."
 
-Recent Conversation History:
-${historyText || "No recent history."}
+Example Q&A:
+Q: Who is Akash Ranjan Saikia?
+A: Akash Ranjan Saikia is a 3rd-year B.Tech Computer Science student and full-stack developer focused on backend development, scalable web applications, and Generative AI.
+
+Q: What technologies does Akash use?
+A: He works with React.js, Node.js, Express, MongoDB, Python, and also builds RAG applications using LLMs like Gemini and tools such as Pinecone.
+
+Conversation Summary:
+${currentSummary || "None"}
+
+Recent Conversation:
+${historyText || "None"}
 
 Context:
 ${context}
@@ -96,10 +107,11 @@ Answer:
   const result = await chatModel.generateContent(prompt);
   const answer = result.response.text();
 
-  // Generate a new summary if needed (e.g., after every few messages)
+  // Generate a new summary if needed (e.g., after every 4 user messages)
   let newSummary = currentSummary;
   try {
-    if (history.length >= 2) {
+    const userMessageCount = history.filter(msg => msg.sender === 'user').length;
+    if (userMessageCount > 0 && userMessageCount % 4 === 0) {
       const summaryPrompt = `
 Summarize the following conversation history and the previous summary into a single, very short paragraph (max 2 sentences).
 Focus on what the user has asked so far and what they are interested in.
@@ -111,12 +123,13 @@ New Assistant Answer: ${answer}
 
 New Summary:
 `;
+      console.log("creating summery");
       const summaryResult = await chatModel.generateContent(summaryPrompt);
       newSummary = summaryResult.response.text().trim();
     }
   } catch (summaryError) {
     console.error("Error generating summary:", summaryError);
-    // Keep the old summary if generation fails
+    
   }
 
   return { answer, summary: newSummary };
